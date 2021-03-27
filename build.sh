@@ -11,8 +11,7 @@ rm *.class
 
 # compile java file
 cd src
-# javac -cp $CLASSPATH ArchiveUpload.java
-javac -cp $CLASSPATH *.java
+javac -cp $CLASSPATH -Xlint:deprecation *.java
 
 # move class file to base dir
 echo "move class files to base folder"

@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Properties;
 import java.text.NumberFormat;
@@ -101,11 +103,12 @@ public class ArchiveUpload {
             // Iterate through all filenames and upload them
             for (String file : fileList) {
                 File inputFile = new File(file);
+                Path path = Paths.get(file);
                 Date startTime = new Date();
                 writer.write("\n  Archive:       " + inputFile);
                 writer.write("\n  File Size:     " + nf.format(inputFile.length()));
                 writer.write("\n  Start Time:    " + startTime);
-                UploadResult result = atm.upload(vaultName, "upload on " + startTime, inputFile);
+                UploadResult result = atm.upload(vaultName, path.getFileName().toString(), inputFile);
                 Date endTime = new Date();
                 writer.write("\n  End Time:      " + endTime);
                 writer.write("\n  Duration:      " + formatTimeDiff(startTime, endTime));
